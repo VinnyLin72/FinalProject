@@ -8,14 +8,12 @@ public class FinalProject extends JFrame implements KeyListener{
 
     public FinalProject(){
 	this.setTitle("Our Game");
-	this.setSize(600,800);
+	this.setSize(600,600);
 	this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 	pane = this.getContentPane();
 
-	
 
-	/*pane.add(player);*/
     }
 
     public void keyPressed(KeyEvent e){
@@ -36,5 +34,9 @@ public class FinalProject extends JFrame implements KeyListener{
     public static void main(String[]args){
 	FinalProject g = new FinalProject();
 	g.setVisible(true);
+	g.repaint();
+    }
+    public void paint(Graphics t){
+	t.drawRect(20,20,50,50);
     }
 }
