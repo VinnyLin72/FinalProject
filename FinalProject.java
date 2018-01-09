@@ -2,23 +2,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class FinalProject extends JFrame implements KeyListener{
-    private Container pane;
-    private Player player = new Player();
-
-    public FinalProject(){
-	this.setTitle("Our Game");
-	this.setSize(600,600);
-	this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-	pane = this.getContentPane();
-
-
-    }
-
-    public void keyPressed(KeyEvent e){
-	char s = e.getKeyChar();
-	System.out.println(s + "");
+public class FinalProject extends JPanel{
+    public Player player = new Player(this);
+    
+    /* public void keyPressed(KeyEvent e){
 	
     }
 
@@ -30,13 +17,26 @@ public class FinalProject extends JFrame implements KeyListener{
 	char s = e.getKeyChar();
 	System.out.println(s + "");
     }
-
-    public static void main(String[]args){
-	FinalProject g = new FinalProject();
-	g.setVisible(true);
-	g.repaint();
+    */
+    private void move(){
+	player.move();
     }
-    public void paint(Graphics t){
-	t.drawRect(20,20,50,50);
+    public void paint(Graphics g){
+	super.paint(g);
+	player.paint(g);
+    }
+
+    public static void main (String[]args)throws InterruptedException{
+	JFrame frame = new JFrame("game");
+	FinalProject game = new FinalProject();
+	frame.add(game);
+	frame.setSize(500,500);
+	frame.setVisible(true);
+	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	while (true){
+	    game.move();
+	    game.repaint();
+	    Thread.sleep(10);
+	}
     }
 }
