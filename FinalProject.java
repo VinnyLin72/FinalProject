@@ -5,19 +5,7 @@ import java.awt.event.*;
 public class FinalProject extends JPanel{
     public Player player = new Player(this);
     
-    /* public void keyPressed(KeyEvent e){
-	
-    }
-
-    public void keyReleased(KeyEvent e){
-
-    }
-
-    public void keyTyped(KeyEvent e){
-	char s = e.getKeyChar();
-	System.out.println(s + "");
-    }
-    */
+   
     private void move(){
 	player.move();
     }
