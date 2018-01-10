@@ -2,13 +2,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class FinalProject extends JPanel{
+public class FinalProject extends JPanel implements KeyListener{
     public Player player = new Player(this);
     
-    /* public void keyPressed(KeyEvent e){
+    public void keyPressed(KeyEvent e){
+	int k = e.getKeyCode();
+	if (k == 37)player.test();
 	
     }
-
+    
     public void keyReleased(KeyEvent e){
 
     }
@@ -17,7 +19,7 @@ public class FinalProject extends JPanel{
 	char s = e.getKeyChar();
 	System.out.println(s + "");
     }
-    */
+    
     private void move(){
 	player.move();
     }
