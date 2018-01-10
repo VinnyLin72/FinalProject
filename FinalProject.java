@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+<<<<<<< HEAD
 public class FinalProject extends JPanel{
     public Player player = new Player(this);
     
@@ -27,4 +28,10 @@ public class FinalProject extends JPanel{
 	    Thread.sleep(10);
 	}
     }
+=======
+public class FinalProject extends Jframe implements keyListener{
+    private container pane;
+    private Rectangle player, hazard;
+    
+>>>>>>> master
 }
