@@ -2,13 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-public class FinalProject extends JPanel{
-    public Player player = new Player(this);
-    
-   
-=======
 public class FinalProject extends JPanel implements KeyListener{
     public Player player = new Player(this);
     
@@ -27,7 +20,6 @@ public class FinalProject extends JPanel implements KeyListener{
 	System.out.println(s + "");
     }
     
->>>>>>> refs/remotes/origin/Vincent
     private void move(){
 	player.move();
     }
@@ -49,10 +41,4 @@ public class FinalProject extends JPanel implements KeyListener{
 	    Thread.sleep(10);
 	}
     }
-=======
-public class FinalProject extends Jframe implements keyListener{
-    private container pane;
-    private Rectangle player, hazard;
-    
->>>>>>> master
 }
