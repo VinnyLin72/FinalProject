@@ -3,10 +3,31 @@ import java.awt.*;
 import java.awt.event.*;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 public class FinalProject extends JPanel{
     public Player player = new Player(this);
     
    
+=======
+public class FinalProject extends JPanel implements KeyListener{
+    public Player player = new Player(this);
+    
+    public void keyPressed(KeyEvent e){
+	int k = e.getKeyCode();
+	if (k == 37)player.test();
+	
+    }
+    
+    public void keyReleased(KeyEvent e){
+
+    }
+
+    public void keyTyped(KeyEvent e){
+	char s = e.getKeyChar();
+	System.out.println(s + "");
+    }
+    
+>>>>>>> refs/remotes/origin/Vincent
     private void move(){
 	player.move();
     }
