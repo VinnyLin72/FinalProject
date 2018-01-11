@@ -6,7 +6,7 @@ import java.awt.event.*;
 @SuppressWarnings("serial")
 public class FinalProject extends JPanel{
     Player player = new Player(this);
-    
+    Hazard hazard = new Hazard(this);
 
     public FinalProject(){
 	addKeyListener(new KeyListener() {
@@ -29,6 +29,7 @@ public class FinalProject extends JPanel{
     
     private void move(){
       	player.move();
+	hazard.move();
     }
     public void paint(Graphics g){
 		super.paint(g);
@@ -36,6 +37,7 @@ public class FinalProject extends JPanel{
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
 		player.paint(g2d);
+		hazard.paint(g2d);
     }
 
     public static void main (String[]args)throws InterruptedException{
