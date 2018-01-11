@@ -5,8 +5,8 @@ import java.awt.event.*;
 public class Player extends Rectangle implements KeyListener{
     int x = 300;
     int y = 300;
-    int xa = 1;
-    int ya = 1;
+    int xa = 0;
+    int ya = 0;
     
     
     private int lives;
@@ -19,12 +19,15 @@ public class Player extends Rectangle implements KeyListener{
     }
 
     public void keyPressed(KeyEvent e) {
-	int k = e.getKeyCode();
-	if (k == KeyEvent.VK_DOWN)y --;
+	if (e.getKeyCode() == KeyEvent.VK_UP) ya = -1;
+	if (e.getKeyCode() == KeyEvent.VK_RIGHT) xa = 1;
+	if (e.getKeyCode() == KeyEvent.VK_LEFT) xa = -1;
+	if (e.getKeyCode() == KeyEvent.VK_DOWN) ya = 1;
     }
 
     public void keyReleased(KeyEvent e) {
-
+	ya = 0;
+	xa = 0;
     }
 
     public void keyTyped(KeyEvent e){
@@ -34,7 +37,8 @@ public class Player extends Rectangle implements KeyListener{
 	x --;
     }
     public void move(){
-	y++;
+	y += ya;
+	x += xa;
     }
 
     public void hurt(){
@@ -48,9 +52,4 @@ public class Player extends Rectangle implements KeyListener{
     public void paint(Graphics g){	
 	g.fillRect(x,y,30,30);
     }
-
-    public void keyPressed(int k){
-
-    }
-
-}
+ }
