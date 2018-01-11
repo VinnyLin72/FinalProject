@@ -20,7 +20,7 @@ public class Player extends Rectangle implements KeyListener{
 
     public void keyPressed(KeyEvent e) {
 	int k = e.getKeyCode();
-	if (k == 37)y --;
+	if (k == KeyEvent.VK_DOWN)y --;
     }
 
     public void keyReleased(KeyEvent e) {
@@ -34,7 +34,7 @@ public class Player extends Rectangle implements KeyListener{
 	x --;
     }
     public void move(){
-	y --;
+	y++;
     }
 
     public void hurt(){
