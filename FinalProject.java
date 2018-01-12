@@ -31,6 +31,9 @@ public class FinalProject extends JPanel{
       	player.move();
 	hazard.move();
     }
+
+    Graphics h2d;
+    
     public void paint(Graphics g){
 		super.paint(g);
 		Graphics2D g2d = (Graphics2D) g;
