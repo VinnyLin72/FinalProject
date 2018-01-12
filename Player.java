@@ -43,6 +43,8 @@ public class Player extends Rectangle implements KeyListener{
 
     public void hurt(){
 	lives --;
+	x = 300;
+	y = 300;
     }
 
     public int getLives(){
