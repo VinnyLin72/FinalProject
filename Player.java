@@ -45,6 +45,10 @@ public class Player extends Rectangle implements KeyListener{
 	lives --;
     }
 
+    public int getLives(){
+	return lives;
+    }
+
     public void checkAlive(){
 	if (lives == 0) alive = false;
     }

@@ -15,6 +15,12 @@ public class Hazard extends Rectangle{
 	x = (int)(Math.random() * 50) * 10;
     }
 
+    public void playerCollision(){
+	if(new Rectangle(x,y,10,15).intersects(new Rectangle(game.player.x, game.player.y, 30, 30))){
+	    game.player.hurt();
+	}
+    }
+
     public void move(){
 	y ++;
     }

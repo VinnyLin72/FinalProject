@@ -7,6 +7,7 @@ import java.awt.event.*;
 public class FinalProject extends JPanel{
     Player player = new Player(this);
     Hazard hazard = new Hazard(this);
+    public JLabel liveCounter;
 
     public FinalProject(){
 	addKeyListener(new KeyListener() {
@@ -25,6 +26,9 @@ public class FinalProject extends JPanel{
 		}
 	    });
 	setFocusable(true);
+	liveCounter = new JLabel(""+player.getLives());
+	liveCounter.setHorizontalAlignment(2);
+	liveCounter.setVerticalAlignment(1);
     }
     
     private void move(){
@@ -47,13 +51,17 @@ public class FinalProject extends JPanel{
 	JFrame frame = new JFrame("game");
 	FinalProject game = new FinalProject();
 	frame.add(game);
+	//	frame.add(game.liveCounter);
 	frame.setSize(500,500);
 	frame.setVisible(true);
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	while (true){
 	    game.move();
+	    game.hazard.playerCollision();
+	    //	    game.liveCounter.setText(""+game.player.getLives());
 	    game.repaint();
 	    Thread.sleep(10);
+	    System.out.println(game.player.getLives());
 	}
     }
 }
