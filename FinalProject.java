@@ -67,7 +67,7 @@ public class FinalProject extends JPanel{
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	Timer timer = new Timer();
 	timer.scheduleAtFixedRate(new hazardSpawn(game),3000, 300);
-	while (true){
+	while (game.player.alive){
 	    game.move();
 	    game.hazard.playerCollision();
 	    for(Hazard x: game.hazards){
@@ -76,6 +76,7 @@ public class FinalProject extends JPanel{
 	    //	    game.liveCounter.setText(""+game.player.getLives());
 	    game.repaint();
 	    Thread.sleep(10);
+	    game.player.checkAlive();
 	    System.out.println(game.player.getLives());
 	}
     }

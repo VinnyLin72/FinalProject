@@ -10,7 +10,7 @@ public class Player extends Rectangle implements KeyListener{
     
     
     private int lives;
-    private boolean alive = true;
+    public boolean alive = true;
     private FinalProject game;
 
     public Player(FinalProject game){
