@@ -33,9 +33,7 @@ public class Player extends Rectangle implements KeyListener{
     public void keyTyped(KeyEvent e){
 
     }
-    public void test(){
-	x --;
-    }
+ 
     public void move(){
 	y += ya;
 	x += xa;
