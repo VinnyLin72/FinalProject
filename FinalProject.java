@@ -75,7 +75,7 @@ public class FinalProject extends JPanel{
 	frame.setVisible(true);
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	Timer timer = new Timer();
-	timer.scheduleAtFixedRate(new hazardSpawn(game),500, 750);
+	timer.scheduleAtFixedRate(new hazardSpawn(game),500, 600);
 	int Score = 0;
 	while (game.player.alive){
 	    game.move();
