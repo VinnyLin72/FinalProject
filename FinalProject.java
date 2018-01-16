@@ -82,6 +82,9 @@ public class FinalProject extends JPanel{
 	    for(int i = 0; i < game.hazards.size(); i ++){
 		game.hazards.get(i).playerCollision();
 	    }
+	    while(game.player.x > 200){
+		game.player.x--;
+	    }
 	    game.cleanUpHazards();
 	    //  game.liveCounter.setText(""+game.player.getLives());
 	    game.repaint();
