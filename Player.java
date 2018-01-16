@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class Player extends Rectangle implements KeyListener{
-    int x = 300;
+    int x = 100;
     int y = 300;
     int xa = 0;
     int ya = 0;
@@ -43,7 +43,7 @@ public class Player extends Rectangle implements KeyListener{
 
     public void hurt(){
 	lives --;
-	x = 300;
+	x = 100;
 	y = 300;
     }
 

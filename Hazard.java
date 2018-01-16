@@ -12,7 +12,7 @@ public class Hazard extends Rectangle{
 
     public Hazard(FinalProject game){
 	this.game = game;
-	x = (int)(Math.random() * 50) * 10;
+	x = (int)(Math.random() * 10) * 20;
     }
 
     public void playerCollision(){

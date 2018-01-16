@@ -67,7 +67,7 @@ public class FinalProject extends JPanel{
 	FinalProject game = new FinalProject();
 	frame.add(game);
 	//	frame.add(game.liveCounter);
-	frame.setSize(500,500);
+	frame.setSize(200,500);
 	frame.setVisible(true);
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	Timer timer = new Timer();
