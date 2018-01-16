@@ -57,6 +57,11 @@ public class FinalProject extends JPanel{
 		}
     }
 
+    public void gameOver(){
+	JOptionPane.showMessageDialog(this, "Game Over" , "Game Over", JOptionPane.YES_NO_OPTION);
+	System.exit(ABORT);
+    }
+
     public static void main (String[]args)throws InterruptedException{
 	JFrame frame = new JFrame("game");
 	FinalProject game = new FinalProject();
@@ -79,5 +84,6 @@ public class FinalProject extends JPanel{
 	    game.player.checkAlive();
 	    System.out.println(game.player.getLives());
 	}
+	game.gameOver();
     }
 }
