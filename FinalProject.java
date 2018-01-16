@@ -61,8 +61,8 @@ public class FinalProject extends JPanel{
     }
 
     public void cleanUpHazards(){
-	for (Hazard x: hazards){
-	    if (x.y > 500) hazards.remove(x);
+	for (int i = 0; i < hazards.size(); i ++){
+	    if (hazards.get(i).y > 500) hazards.remove(i);
 	}
     }
 
@@ -75,14 +75,14 @@ public class FinalProject extends JPanel{
 	frame.setVisible(true);
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	Timer timer = new Timer();
-	timer.scheduleAtFixedRate(new hazardSpawn(game),500, 500);
+	timer.scheduleAtFixedRate(new hazardSpawn(game),500, 1000);
 	int Score = 0;
 	while (game.player.alive){
 	    game.move();
-	    for(Hazard x: game.hazards){
-		game.cleanUpHazards();
-		x.playerCollision();
+	    for(int i = 0; i < game.hazards.size(); i ++){
+		game.hazards.get(i).playerCollision();
 	    }
+	    game.cleanUpHazards();
 	    //  game.liveCounter.setText(""+game.player.getLives());
 	    game.repaint();
 	    Thread.sleep(10);
