@@ -9,7 +9,6 @@ import java.util.TimerTask;
 @SuppressWarnings("serial")
 public class FinalProject extends JPanel{
     Player player = new Player(this);
-    Hazard hazard = new Hazard(this);
     public ArrayList<Hazard> hazards = new ArrayList<Hazard>();
     public JLabel liveCounter;
 
@@ -33,11 +32,11 @@ public class FinalProject extends JPanel{
 	liveCounter = new JLabel(""+player.getLives());
 	liveCounter.setHorizontalAlignment(2);
 	liveCounter.setVerticalAlignment(1);
+	liveCounter.setSize(10,10);
     }
     
     private void move(){
       	player.move();
-	hazard.move();
 	for(Hazard x: hazards){
 	    x.move();
 	}
@@ -51,7 +50,6 @@ public class FinalProject extends JPanel{
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
 		player.paint(g2d);
-		hazard.paint(g2d);
 		for(Hazard x: hazards){
 		    x.paint(g2d);
 		}
@@ -60,6 +58,12 @@ public class FinalProject extends JPanel{
     public void gameOver(){
 	JOptionPane.showMessageDialog(this, "Game Over" , "Game Over", JOptionPane.YES_NO_OPTION);
 	System.exit(ABORT);
+    }
+
+    public void cleanUpHazards(){
+	for (Hazard x: hazards){
+	    if (x.y > 500) hazards.remove(x);
+	}
     }
 
     public static void main (String[]args)throws InterruptedException{
@@ -71,17 +75,20 @@ public class FinalProject extends JPanel{
 	frame.setVisible(true);
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	Timer timer = new Timer();
-	timer.scheduleAtFixedRate(new hazardSpawn(game),3000, 300);
+	timer.scheduleAtFixedRate(new hazardSpawn(game),500, 500);
+	int Score = 0;
 	while (game.player.alive){
 	    game.move();
-	    game.hazard.playerCollision();
 	    for(Hazard x: game.hazards){
+		game.cleanUpHazards();
 		x.playerCollision();
 	    }
-	    //	    game.liveCounter.setText(""+game.player.getLives());
+	    //  game.liveCounter.setText(""+game.player.getLives());
 	    game.repaint();
 	    Thread.sleep(10);
 	    game.player.checkAlive();
+	    Score += 1;
+	    System.out.println(Score / 10);
 	    System.out.println(game.player.getLives());
 	}
 	game.gameOver();

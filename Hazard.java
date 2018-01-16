@@ -4,9 +4,8 @@ import java.awt.event.*;
 
 public class Hazard extends Rectangle{
     int x;
-    int y = -50;
-    int xa = 0;
-    int ya = 0;
+    int y = -20;
+    int ya = 1;
 
     private FinalProject game;
 
@@ -22,7 +21,7 @@ public class Hazard extends Rectangle{
     }
 
     public void move(){
-	y ++;
+	y += ya;
     }
     public void paint(Graphics g){
 	g.fillRect(x,y,10,15);
