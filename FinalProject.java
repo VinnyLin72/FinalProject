@@ -66,6 +66,21 @@ public class FinalProject extends JPanel{
 	}
     }
 
+    public void keepPlayerInBounds(){
+	while(player.x > 200){
+	    player.x--;
+	}
+	while(player.x < 0){
+	    player.x++;
+	}
+	while(player.y > 500){
+	    player.y--;
+	}
+	while(player.y < 0){
+	    player.y++;
+	}
+    }
+
     public static void main (String[]args)throws InterruptedException{
 	JFrame frame = new JFrame("game");
 	FinalProject game = new FinalProject();
@@ -82,11 +97,10 @@ public class FinalProject extends JPanel{
 	    for(int i = 0; i < game.hazards.size(); i ++){
 		game.hazards.get(i).playerCollision();
 	    }
-	    while(game.player.x > 200){
-		game.player.x--;
-	    }
+	    
 	    game.cleanUpHazards();
 	    //  game.liveCounter.setText(""+game.player.getLives());
+	    game.keepPlayerInBounds();
 	    game.repaint();
 	    Thread.sleep(10);
 	    game.player.checkAlive();
