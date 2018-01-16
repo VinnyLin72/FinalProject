@@ -55,8 +55,8 @@ public class FinalProject extends JPanel{
 		}
     }
 
-    public void gameOver(){
-	JOptionPane.showMessageDialog(this, "Game Over" , "Game Over", JOptionPane.YES_NO_OPTION);
+    public void gameOver(int s){
+	JOptionPane.showMessageDialog(this, "Game Over \nYour Score is: " + s, "Game Over", JOptionPane.YES_NO_OPTION);
 	System.exit(ABORT);
     }
 
@@ -108,6 +108,6 @@ public class FinalProject extends JPanel{
 	    System.out.println(Score / 10);
 	    System.out.println(game.player.getLives());
 	}
-	game.gameOver();
+	game.gameOver(Score / 10);
     }
 }
