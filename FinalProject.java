@@ -15,6 +15,7 @@ public class FinalProject extends JPanel{
     private JTextField liveCounter;
     private int score;
     private int level;
+    private int nextLevelScore = 100;
 
     public FinalProject(){
 	addKeyListener(new KeyListener() {
@@ -104,7 +105,9 @@ public class FinalProject extends JPanel{
     }
 
     public void levelup(){
-	level++;
+	if(score == nextLevelScore){
+	    level++;
+	}
     }
 
     public int getLevel(){
@@ -116,13 +119,14 @@ public class FinalProject extends JPanel{
 	game.initGame(game);
 	Timer timer = new Timer();
 	timer.scheduleAtFixedRate(new hazardSpawn(game),0, 500);
-	timer.scheduleAtFixedRate(new LevelUp(game),0, 50000);
+	timer.scheduleAtFixedRate(new LevelUp(game),0, 5000);
 	while (game.player.checkAlive()){
 	    game.update();
 	    Thread.sleep(5);
-	 	    System.out.println(game.getScore() / 10);
+	    System.out.println(game.getScore() / 10);
 	    System.out.println(game.player.getLives());
-	    System.out.println(game)
+	    System.out.println(game.getLevel());
+	  
 	}
 	game.gameOver(game.getScore() / 10);
     }
