@@ -8,9 +8,12 @@ import java.util.TimerTask;
 
 @SuppressWarnings("serial")
 public class FinalProject extends JPanel{
+    private JFrame frame;
+    private JPanel pane;
     Player player = new Player(this);
-    public ArrayList<Hazard> hazards = new ArrayList<Hazard>();
-    public JLabel liveCounter;
+    ArrayList<Hazard> hazards = new ArrayList<Hazard>();
+    private JTextField liveCounter;
+    private int score;
 
     public FinalProject(){
 	addKeyListener(new KeyListener() {
@@ -29,30 +32,48 @@ public class FinalProject extends JPanel{
 		}
 	    });
 	setFocusable(true);
-	liveCounter = new JLabel(""+player.getLives());
-	liveCounter.setHorizontalAlignment(2);
-	liveCounter.setVerticalAlignment(1);
-	liveCounter.setSize(10,10);
-    }
-    
-    private void move(){
-      	player.move();
-	for(Hazard x: hazards){
-	    x.move();
-	}
     }
 
-    Graphics h2d;
+    private void initGame(FinalProject game){
+	frame = new JFrame("Game");
+	frame.add(game);
+       	frame.setSize(200,500);
+	frame.setVisible(true);
+	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	frame.setResizable(false);
+        }
+
+    public int getScore(){
+	return score;
+    }
+
+    public void addScore(){
+	score ++;
+    }
     
-    public void paint(Graphics g){
-		super.paint(g);
-		Graphics2D g2d = (Graphics2D) g;
-		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-				RenderingHints.VALUE_ANTIALIAS_ON);
-		player.paint(g2d);
-		for(Hazard x: hazards){
-		    x.paint(g2d);
+    private void update(){
+      	player.move();
+	keepPlayerInBounds();
+	for(int i = 0; i < hazards.size(); i ++){
+	    hazards.get(i).move();
+	    if (hazards.get(i).playerCollision()){
+		    hazards.remove(i);
 		}
+	}
+	addScore();
+	cleanUpHazards();
+	repaint();
+    }
+
+    public void paint(Graphics g){
+	super.paint(g);
+	Graphics2D g2d = (Graphics2D) g;
+	g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+			     RenderingHints.VALUE_ANTIALIAS_ON);
+	player.paint(g2d);
+	for(Hazard x: hazards){
+	    x.paint(g2d);
+	}
     }
 
     public void gameOver(int s){
@@ -82,32 +103,16 @@ public class FinalProject extends JPanel{
     }
 
     public static void main (String[]args)throws InterruptedException{
-	JFrame frame = new JFrame("game");
 	FinalProject game = new FinalProject();
-	frame.add(game);
-	//	frame.add(game.liveCounter);
-	frame.setSize(200,500);
-	frame.setVisible(true);
-	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	game.initGame(game);
 	Timer timer = new Timer();
-	timer.scheduleAtFixedRate(new hazardSpawn(game),500, 600);
-	int Score = 0;
-	while (game.player.alive){
-	    game.move();
-	    for(int i = 0; i < game.hazards.size(); i ++){
-		game.hazards.get(i).playerCollision();
-	    }
-	    
-	    game.cleanUpHazards();
-	    //  game.liveCounter.setText(""+game.player.getLives());
-	    game.keepPlayerInBounds();
-	    game.repaint();
-	    Thread.sleep(10);
-	    game.player.checkAlive();
-	    Score += 1;
-	    System.out.println(Score / 10);
+	timer.scheduleAtFixedRate(new hazardSpawn(game),0, 500);
+	while (game.player.checkAlive()){
+	    game.update();
+	    Thread.sleep(5);
+	 	    System.out.println(game.getScore() / 10);
 	    System.out.println(game.player.getLives());
 	}
-	game.gameOver(Score / 10);
+	game.gameOver(game.getScore() / 10);
     }
 }

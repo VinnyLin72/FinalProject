@@ -10,7 +10,6 @@ public class Player extends Rectangle implements KeyListener{
     
     
     private int lives;
-    public boolean alive = true;
     private FinalProject game;
 
     public Player(FinalProject game){
@@ -41,19 +40,21 @@ public class Player extends Rectangle implements KeyListener{
 
     public void hurt(){
 	lives --;
-	x = 100;
-	y = 300;
     }
 
     public int getLives(){
 	return lives;
     }
 
-    public void checkAlive(){
-	if (lives == 0) alive = false;
+    public boolean checkAlive(){
+	return (lives > 0);
     }
 
     public void paint(Graphics g){	
 	g.fillRect(x,y,30,30);
+    }
+
+    public Rectangle getBounds(){
+	return new Rectangle(x,y,30,30);
     }
  }
