@@ -21,7 +21,7 @@ public class Hazard extends Rectangle{
     }
 
     public Rectangle getBounds(){
-	return new Rectangle (x,y,10,15);
+	return new Rectangle (x,y,25,30);
     }
 
     public boolean playerCollision(){
@@ -36,6 +36,6 @@ public class Hazard extends Rectangle{
 	y += ya;
     }
     public void paint(Graphics g){ 
-	g.fillRect(x,y,10,15);
+	g.fillRect(x,y,25,30);
     }
 }
