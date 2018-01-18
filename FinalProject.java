@@ -14,6 +14,7 @@ public class FinalProject extends JPanel{
     ArrayList<Hazard> hazards = new ArrayList<Hazard>();
     private JTextField liveCounter;
     private int score;
+    private int level;
 
     public FinalProject(){
 	addKeyListener(new KeyListener() {
@@ -102,16 +103,26 @@ public class FinalProject extends JPanel{
 	}
     }
 
+    public void levelup(){
+	level++;
+    }
+
+    public int getLevel(){
+	return level;
+    }
+    
     public static void main (String[]args)throws InterruptedException{
 	FinalProject game = new FinalProject();
 	game.initGame(game);
 	Timer timer = new Timer();
 	timer.scheduleAtFixedRate(new hazardSpawn(game),0, 500);
+	timer.scheduleAtFixedRate(new LevelUp(game),0, 50000);
 	while (game.player.checkAlive()){
 	    game.update();
 	    Thread.sleep(5);
 	 	    System.out.println(game.getScore() / 10);
 	    System.out.println(game.player.getLives());
+	    System.out.println(game)
 	}
 	game.gameOver(game.getScore() / 10);
     }
