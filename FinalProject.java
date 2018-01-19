@@ -71,8 +71,8 @@ public class FinalProject extends JPanel{
 	g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 			     RenderingHints.VALUE_ANTIALIAS_ON);
 	player.paint(g2d);
-	for(Hazard x: hazards){
-	    x.paint(g2d);
+	for(int i = 0; i < hazards.size(); i ++){
+	    hazards.get(i).paint(g2d);
 	}
     }
 
