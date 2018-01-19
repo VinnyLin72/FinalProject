@@ -14,8 +14,10 @@ public class FinalProject extends JPanel{
     ArrayList<Hazard> hazards = new ArrayList<Hazard>();
     private JTextField liveCounter;
     private int score;
+    private int hiscore;
     private int level;
     private int nextLevelScore = 100;
+
 
     public FinalProject(){
 	addKeyListener(new KeyListener() {
@@ -52,7 +54,16 @@ public class FinalProject extends JPanel{
     public void addScore(){
 	score ++;
     }
-    
+
+    public int getHiScore(){
+	return hiscore;
+    }
+
+    public void updateHiScore(){
+	if (score > hiscore){
+	hiscore = score;
+	}
+    }
     private void update(){
       	player.move();
 	keepPlayerInBounds();
@@ -63,6 +74,7 @@ public class FinalProject extends JPanel{
 		}
 	}
 	addScore();
+	updateHiScore();
 	cleanUpHazards();
 	repaint();
     }
@@ -73,13 +85,13 @@ public class FinalProject extends JPanel{
 	g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 			     RenderingHints.VALUE_ANTIALIAS_ON);
 	player.paint(g2d);
-	for(Hazard x: hazards){
-	    x.paint(g2d);
+	for(int i = 0; i < hazards.size(); i ++){
+	    hazards.get(i).paint(g2d);
 	}
     }
 
-    public void gameOver(int s){
-	JOptionPane.showMessageDialog(this, "Game Over \nYour Score is: " + s, "Game Over", JOptionPane.YES_NO_OPTION);
+    public void gameOver(int s, int h){
+	JOptionPane.showMessageDialog(this, "Game Over \nYour Score is: " + s + "\nThe Highest Score is: " + h, "Game Over", JOptionPane.YES_NO_OPTION);
 	System.exit(ABORT);
     }
 
@@ -107,27 +119,25 @@ public class FinalProject extends JPanel{
     public void levelup(){
 	if(score == nextLevelScore){
 	    level++;
+	    level = (level + 100)*1.05;
 	}
     }
 
     public int getLevel(){
 	return level;
     }
-    
+
     public static void main (String[]args)throws InterruptedException{
 	FinalProject game = new FinalProject();
 	game.initGame(game);
 	Timer timer = new Timer();
 	timer.scheduleAtFixedRate(new hazardSpawn(game),0, 500);
-	timer.scheduleAtFixedRate(new LevelUp(game),0, 5000);
 	while (game.player.checkAlive()){
 	    game.update();
 	    Thread.sleep(5);
-	    System.out.println(game.getScore() / 10);
+	 	    System.out.println(game.getScore() / 10);
 	    System.out.println(game.player.getLives());
-	    System.out.println(game.getLevel());
-	  
 	}
-	game.gameOver(game.getScore() / 10);
+	game.gameOver(game.getScore() / 10, game.getHiScore() / 10);
     }
 }
