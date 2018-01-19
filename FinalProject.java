@@ -14,6 +14,7 @@ public class FinalProject extends JPanel{
     ArrayList<Hazard> hazards = new ArrayList<Hazard>();
     private JTextField liveCounter;
     private int score;
+    private int hiscore;
 
     public FinalProject(){
 	addKeyListener(new KeyListener() {
@@ -50,7 +51,16 @@ public class FinalProject extends JPanel{
     public void addScore(){
 	score ++;
     }
-    
+
+    public int getHiScore(){
+	return hiscore;
+    }
+
+    public void updateHiScore(){
+	if (score > hiscore){
+	hiscore = score;
+	}
+    }
     private void update(){
       	player.move();
 	keepPlayerInBounds();
@@ -61,6 +71,7 @@ public class FinalProject extends JPanel{
 		}
 	}
 	addScore();
+	updateHiScore();
 	cleanUpHazards();
 	repaint();
     }
@@ -76,8 +87,8 @@ public class FinalProject extends JPanel{
 	}
     }
 
-    public void gameOver(int s){
-	JOptionPane.showMessageDialog(this, "Game Over \nYour Score is: " + s, "Game Over", JOptionPane.YES_NO_OPTION);
+    public void gameOver(int s, int h){
+	JOptionPane.showMessageDialog(this, "Game Over \nYour Score is: " + s + "\nThe Highest Score is: " + h, "Game Over", JOptionPane.YES_NO_OPTION);
 	System.exit(ABORT);
     }
 
@@ -113,6 +124,6 @@ public class FinalProject extends JPanel{
 	 	    System.out.println(game.getScore() / 10);
 	    System.out.println(game.player.getLives());
 	}
-	game.gameOver(game.getScore() / 10);
+	game.gameOver(game.getScore() / 10, game.getHiScore() / 10);
     }
 }
