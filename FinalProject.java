@@ -15,6 +15,8 @@ public class FinalProject extends JPanel{
     private JTextField liveCounter;
     private int score;
     private int hiscore;
+    private int level = 1;
+    private int nextLevelScore = 1000;
 
     public FinalProject(){
 	addKeyListener(new KeyListener() {
@@ -74,6 +76,7 @@ public class FinalProject extends JPanel{
 	updateHiScore();
 	cleanUpHazards();
 	repaint();
+	levelUp();
     }
 
     public void paint(Graphics g){
@@ -113,6 +116,17 @@ public class FinalProject extends JPanel{
 	}
     }
 
+    public void levelUp(){
+	if(score >= nextLevelScore){
+	    level++;
+	    nextLevelScore = (nextLevelScore + 10000)/4*5;
+	}
+    }
+
+    public int getLevel(){
+	return level;
+    }
+
     public static void main (String[]args)throws InterruptedException{
 	FinalProject game = new FinalProject();
 	game.initGame(game);
@@ -121,8 +135,9 @@ public class FinalProject extends JPanel{
 	while (game.player.checkAlive()){
 	    game.update();
 	    Thread.sleep(5);
-	    System.out.println(game.getScore() / 10);
-	    System.out.println(game.player.getLives());
+	    System.out.println("Score: " + game.getScore() / 10);
+	    System.out.println("Lives: " + game.player.getLives());
+	    System.out.println("Level: " + game.getLevel());
 	}
 	game.gameOver(game.getScore() / 10, game.getHiScore() / 10);
     }
