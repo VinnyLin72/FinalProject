@@ -17,6 +17,7 @@ public class FinalProject extends JPanel{
     private int hiscore;
     private int level = 1;
     private int nextLevelScore = 1000;
+    private Timer timer = new Timer();
 
     public FinalProject(){
 	addKeyListener(new KeyListener() {
@@ -44,6 +45,7 @@ public class FinalProject extends JPanel{
 	frame.setVisible(true);
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	frame.setResizable(false);
+	timer.scheduleAtFixedRate(new hazardSpawn(game),0, 500);
         }
 
     public int getScore(){
@@ -88,6 +90,7 @@ public class FinalProject extends JPanel{
 	for(int i = 0; i < hazards.size(); i ++){
 	    hazards.get(i).paint(g2d);
 	}
+	g.drawString("Score: " + getScore() + "   Lives: " + player.getLives() + "   Level: " + level, 10, 25);
     }
 
     public void gameOver(int s, int h){
@@ -130,8 +133,8 @@ public class FinalProject extends JPanel{
     public static void main (String[]args)throws InterruptedException{
 	FinalProject game = new FinalProject();
 	game.initGame(game);
-	Timer timer = new Timer();
-	timer.scheduleAtFixedRate(new hazardSpawn(game),0, 500);
+	
+	
 	while (game.player.checkAlive()){
 	    game.update();
 	    Thread.sleep(5);
