@@ -18,6 +18,8 @@ public class FinalProject extends JPanel{
     private int level = 1;
     private int nextLevelScore = 1000;
     private Timer timer = new Timer();
+    private int amount = 1;
+    private int timeBetweenSpawn = 500;
 
     public FinalProject(){
 	addKeyListener(new KeyListener() {
@@ -122,8 +124,15 @@ public class FinalProject extends JPanel{
     public void levelUp(){
 	if(score >= nextLevelScore){
 	    level++;
+	    timeBetweenSpawn--;
 	    nextLevelScore = (nextLevelScore + 4000)/4*5;
+	    if(level % 10 == 0){
+		amount++;
+	    }
 	}
+	timer.cancel();
+	timer = new Timer();
+	timer.scheduleAtFixedRate(new hazardSpawn(game, amount),0, timeBetweenSpawn);
     }
 
     public int getLevel(){
