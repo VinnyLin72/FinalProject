@@ -106,7 +106,7 @@ public class FinalProject extends JPanel{
 
     public void keepPlayerInBounds(){
 	while(player.x > 170){
-	    player.x--;
+	    player.x--; 
 	}
 	while(player.x < 0){
 	    player.x++;
