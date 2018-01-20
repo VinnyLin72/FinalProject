@@ -52,6 +52,10 @@ public class Player extends Rectangle implements KeyListener{
 	return (lives > 0);
     }
 
+    public void godPower(int l){
+	lives = l;
+    }
+    
     public void paint(Graphics g){	
 	g.fillRect(x,y,30,30);
     }
