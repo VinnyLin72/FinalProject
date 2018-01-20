@@ -128,6 +128,7 @@ public class FinalProject extends JPanel{
 	    nextLevelScore = (nextLevelScore + 700)/4*5;
 	    if(level % 10 == 0){
 		amount++;
+		timeBetweenSpawn+=40;
 	    }
 	
 	    timer.cancel();
