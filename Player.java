@@ -1,13 +1,16 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import javax.imageio.*;
+import java.awt.image.BufferedImage;
+import java.io.*;
 
 public class Player extends Rectangle implements KeyListener{
     int x = 100;
     int y = 300;
     int xa = 0;
     int ya = 0;
-    
+    private BufferedImage image;
     
     private int lives;
     private FinalProject game;
@@ -15,6 +18,11 @@ public class Player extends Rectangle implements KeyListener{
     public Player(FinalProject game){
 	this.game = game;
 	lives = 3;
+	try{
+	    image = ImageIO.read(new File("Player.png"));
+	}catch(IOException e){
+	    e.printStackTrace();
+	}
     }
 
     public void keyPressed(KeyEvent e) {
@@ -57,7 +65,8 @@ public class Player extends Rectangle implements KeyListener{
     }
     
     public void paint(Graphics g){	
-	g.fillRect(x,y,30,30);
+	//g.fillRect(x,y,30,30);
+	g.drawImage(image, x, y, null);
     }
 
     public Rectangle getBounds(){
