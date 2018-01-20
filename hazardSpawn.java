@@ -4,6 +4,10 @@ import java.util.TimerTask;
 public class hazardSpawn extends TimerTask{
     FinalProject game;
     int amount;
+
+    public hazardSpawn(FinalProject g){
+	game = g;
+    }
     
     public hazardSpawn(FinalProject g, int a){
 	game = g;
