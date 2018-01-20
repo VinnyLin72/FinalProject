@@ -3,12 +3,16 @@ import java.util.TimerTask;
 
 public class hazardSpawn extends TimerTask{
     FinalProject game;
+    int amount;
     
-    public hazardSpawn(FinalProject g){
+    public hazardSpawn(FinalProject g, int a){
 	game = g;
+	amount = a;
     }
     
     public void run(){
-	game.hazards.add(new Hazard(game));
+	for(int x = 0; x < amount; x++){
+	    game.hazards.add(new Hazard(game));
+	}
     }
 }
