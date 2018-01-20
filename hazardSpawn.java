@@ -3,7 +3,7 @@ import java.util.TimerTask;
 
 public class hazardSpawn extends TimerTask{
     FinalProject game;
-    int amount;
+    int amount = 1;
 
     public hazardSpawn(FinalProject g){
 	game = g;
