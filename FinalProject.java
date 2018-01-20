@@ -137,6 +137,10 @@ public class FinalProject extends JPanel{
 	}
     }
 
+    public void ultimatescore(int cheat){
+	score += cheat;
+    }
+    
     public int getLevel(){
 	return level;
     }
@@ -147,6 +151,9 @@ public class FinalProject extends JPanel{
 	if (args.length>0){
 	    if(args[0].equals("dev")){
 		game.player.godPower(Integer.parseInt(args[1]));
+	    }
+	    if(args.length>1){
+		game.ultimatescore(Integer.parseInt(args[2]));
 	    }
 	}
 
