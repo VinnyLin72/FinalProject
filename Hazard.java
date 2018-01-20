@@ -1,19 +1,25 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
 
 public class Hazard extends Rectangle{
     int x;
     int y = -20;
     int ya = 1;
     boolean spawn = true;
-    int count;
+    private BufferedImage image;
+    
 
     private FinalProject game;
 
     public Hazard(FinalProject game){
 	this.game = game;
 	randX();
+	int imRand=(int)(Math.random()*4);
+	image = ImageIO.read(new File("poopyprojectile0"+imRand+".png"));
     }
 
     private void randX(){
@@ -36,6 +42,7 @@ public class Hazard extends Rectangle{
 	y += ya;
     }
     public void paint(Graphics g){ 
-	g.fillRect(x,y,20,30);
+	//g.fillRect(x,y,20,30);
+	g.drawImage(image, x, y, null);
     }
 }
