@@ -122,7 +122,7 @@ public class FinalProject extends JPanel{
     public void levelUp(){
 	if(score >= nextLevelScore){
 	    level++;
-	    nextLevelScore = (nextLevelScore + 10000)/4*5;
+	    nextLevelScore = (nextLevelScore + 4000)/4*5;
 	}
     }
 
@@ -138,9 +138,9 @@ public class FinalProject extends JPanel{
 	while (game.player.checkAlive()){
 	    game.update();
 	    Thread.sleep(5);
-	    System.out.println("Score: " + game.getScore() / 10);
-	    System.out.println("Lives: " + game.player.getLives());
-	    System.out.println("Level: " + game.getLevel());
+	    //System.out.println("Score: " + game.getScore() / 10);
+	    //System.out.println("Lives: " + game.player.getLives());
+	    // System.out.println("Level: " + game.getLevel());
 	}
 	game.gameOver(game.getScore() / 10, game.getHiScore() / 10);
     }
