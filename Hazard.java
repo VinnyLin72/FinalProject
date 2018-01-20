@@ -17,11 +17,11 @@ public class Hazard extends Rectangle{
     }
 
     private void randX(){
-	x = (((int)(Math.random() * 4)) * 50) + 20;
+	x = (((int)(Math.random() * 4 * 50)) + 20)%160;
     }
 
     public Rectangle getBounds(){
-	return new Rectangle (x,y,25,30);
+	return new Rectangle (x,y,20,30);
     }
 
     public boolean playerCollision(){
@@ -36,6 +36,6 @@ public class Hazard extends Rectangle{
 	y += ya;
     }
     public void paint(Graphics g){ 
-	g.fillRect(x,y,25,30);
+	g.fillRect(x,y,20,30);
     }
 }
