@@ -1,9 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import javax.imageio.ImageIO;
+import javax.imageio.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
+import java.io.*;
 
 public class Hazard extends Rectangle{
     int x;
@@ -19,7 +19,11 @@ public class Hazard extends Rectangle{
 	this.game = game;
 	randX();
 	int imRand=(int)(Math.random()*4);
-	image = ImageIO.read(new File("poopyprojectile0"+imRand+".png"));
+	try{
+	    image = ImageIO.read(new File("poopyprojectile0"+imRand+".png"));
+	}catch(IOException e){
+	    e.printStackTrace();
+	}
     }
 
     private void randX(){
