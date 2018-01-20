@@ -126,7 +126,7 @@ public class FinalProject extends JPanel{
 	    level++;
 	    timeBetweenSpawn /= 9/8;
 	    nextLevelScore = (nextLevelScore + 700)/4*5;
-	    if(level % 10 == 0){
+	    if(level % 5 == 0){
 		amount++;
 		timeBetweenSpawn+=40;
 	    }
