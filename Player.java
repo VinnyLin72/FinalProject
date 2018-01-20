@@ -4,6 +4,8 @@ import java.awt.event.*;
 import javax.imageio.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Player extends Rectangle implements KeyListener{
     int x = 100;
@@ -11,9 +13,11 @@ public class Player extends Rectangle implements KeyListener{
     int xa = 0;
     int ya = 0;
     private BufferedImage image;
-    
+    private boolean damagable = true;
     private int lives;
     private FinalProject game;
+    private damageInvincibility invClock;
+    
 
     public Player(FinalProject game){
 	this.game = game;
@@ -49,19 +53,29 @@ public class Player extends Rectangle implements KeyListener{
     }
 
     public void hurt(){
-	lives --;
+	if(damagable){
+	    damagable = false;
+	    lives --;
+	    invClock = new damageInvincibility(this);
+	    x = 70;
+	    y = 300; 
+	}
     }
-
+    
     public int getLives(){
 	return lives;
     }
-
+    
     public boolean checkAlive(){
 	return (lives > 0);
     }
 
     public void godPower(int l){
 	lives = l;
+    }
+
+    public void invincibleStop(){
+	damagable = true;
     }
     
     public void paint(Graphics g){	
