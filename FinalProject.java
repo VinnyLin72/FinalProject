@@ -144,8 +144,10 @@ public class FinalProject extends JPanel{
     public static void main (String[]args)throws InterruptedException{
 	FinalProject game = new FinalProject();
 	game.initGame(game);
-	if(args[0].equals("dev")){
-	    game.player.godPower(Integer.parseInt(args[1]));
+	if (args.length>0){
+	    if(args[0].equals("dev")){
+		game.player.godPower(Integer.parseInt(args[1]));
+	    }
 	}
 
 	while (game.player.checkAlive()){
