@@ -10,13 +10,13 @@ import java.util.TimerTask;
 public class FinalProject extends JPanel{
     private JFrame frame;
     private JPanel pane;
-    Player player = new Player(this);
+    public Player player = new Player(this);
     ArrayList<Hazard> hazards = new ArrayList<Hazard>();
     private JTextField liveCounter;
     private int score;
     private int hiscore;
     private int level = 1;
-    private int nextLevelScore = 1000;
+    private int nextLevelScore = 2000;
     private Timer timer = new Timer();
     private int amount = 1;
     private int timeBetweenSpawn = 500;
@@ -51,7 +51,7 @@ public class FinalProject extends JPanel{
         }
 
     public int getScore(){
-	return score;
+	return score/10;
     }
 
     public void addScore(){
@@ -64,7 +64,7 @@ public class FinalProject extends JPanel{
 
     public void updateHiScore(){
 	if (score > hiscore){
-	hiscore = score;
+	hiscore = score/10;
 	}
     }
     private void update(){
@@ -124,15 +124,16 @@ public class FinalProject extends JPanel{
     public void levelUp(){
 	if(score >= nextLevelScore){
 	    level++;
-	    timeBetweenSpawn--;
-	    nextLevelScore = (nextLevelScore + 4000)/4*5;
+	    timeBetweenSpawn /= 9/8;
+	    nextLevelScore = (nextLevelScore + 700)/4*5;
 	    if(level % 10 == 0){
 		amount++;
 	    }
+	
+	    timer.cancel();
+	    timer = new Timer();
+	    timer.scheduleAtFixedRate(new hazardSpawn(this, amount),12, timeBetweenSpawn);
 	}
-	timer.cancel();
-	timer = new Timer();
-	timer.scheduleAtFixedRate(new hazardSpawn(game, amount),0, timeBetweenSpawn);
     }
 
     public int getLevel(){
@@ -142,8 +143,10 @@ public class FinalProject extends JPanel{
     public static void main (String[]args)throws InterruptedException{
 	FinalProject game = new FinalProject();
 	game.initGame(game);
-	
-	
+	if(args[0].equals("dev")){
+	    game.player.godPower(Integer.parseInt(args[1]));
+	}
+
 	while (game.player.checkAlive()){
 	    game.update();
 	    Thread.sleep(5);
@@ -151,6 +154,6 @@ public class FinalProject extends JPanel{
 	    //System.out.println("Lives: " + game.player.getLives());
 	    // System.out.println("Level: " + game.getLevel());
 	}
-	game.gameOver(game.getScore() / 10, game.getHiScore() / 10);
+	game.gameOver(game.getScore(), game.getHiScore());
     }
 }
