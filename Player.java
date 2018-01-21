@@ -37,10 +37,10 @@ public class Player extends Rectangle implements KeyListener{
     }
 
     public void keyReleased(KeyEvent e) {
-	if (e.getKeyCode() == KeyEvent.VK_UP) ya += 1;
-	if (e.getKeyCode() == KeyEvent.VK_RIGHT) xa -= 1;
-	if (e.getKeyCode() == KeyEvent.VK_LEFT) xa += 1;
-	if (e.getKeyCode() == KeyEvent.VK_DOWN) ya -= 1;
+	if (e.getKeyCode() == KeyEvent.VK_UP) ya = 0;
+	if (e.getKeyCode() == KeyEvent.VK_RIGHT) xa = 0;
+	if (e.getKeyCode() == KeyEvent.VK_LEFT) xa = 0;
+	if (e.getKeyCode() == KeyEvent.VK_DOWN) ya = 0;
     }
 
     public void keyTyped(KeyEvent e){
