@@ -43,7 +43,7 @@ public class Player extends Rectangle implements KeyListener{
 	if (e.getKeyCode() == KeyEvent.VK_DOWN) ya = 0;
     }
 
-    public void keyTyped(KeyEvent e){
+    public void keyTyped(KeyEvent e){ 
 
     }
  
