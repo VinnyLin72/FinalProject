@@ -15,6 +15,7 @@ public class Player extends Rectangle implements KeyListener{
     private BufferedImage image;
     private boolean damagable = true;
     private int lives;
+    private int origLives;
     private FinalProject game;
     private damageInvincibility invClock;
     
@@ -22,6 +23,7 @@ public class Player extends Rectangle implements KeyListener{
     public Player(FinalProject game){
 	this.game = game;
 	lives = 3;
+	origLives = lives;
 	try{
 	    image = ImageIO.read(new File("Player.png"));
 	}catch(IOException e){
@@ -51,7 +53,7 @@ public class Player extends Rectangle implements KeyListener{
 	y += ya;
 	x += xa;
     }
-
+    
     public void hurt(){
 	if(damagable){
 	    damagable = false;
@@ -65,6 +67,10 @@ public class Player extends Rectangle implements KeyListener{
     public int getLives(){
 	return lives;
     }
+
+    public void revive(){
+	lives = origLives;
+    }
     
     public boolean checkAlive(){
 	return (lives > 0);
@@ -72,6 +78,7 @@ public class Player extends Rectangle implements KeyListener{
 
     public void godPower(int l){
 	lives = l;
+	origLives = l;
     }
 
     public void invincibleStop(){

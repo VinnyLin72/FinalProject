@@ -20,6 +20,8 @@ public class FinalProject extends JPanel{
     private Timer timer = new Timer();
     private int amount = 1;
     private int timeBetweenSpawn = 500;
+    private int Scored;
+    public boolean running = true;
 
     public FinalProject(){
 	addKeyListener(new KeyListener() {
@@ -56,6 +58,7 @@ public class FinalProject extends JPanel{
 
     public void addScore(){
 	score ++;
+	Scored ++;
     }
 
     public int getHiScore(){
@@ -63,11 +66,12 @@ public class FinalProject extends JPanel{
     }
 
     public void updateHiScore(){
-	if (score > hiscore){
-	hiscore = score/10;
-	}
+	if (getScore() > hiscore) hiscore = score/10;
     }
     private void update(){
+	System.out.println("Scored" + Scored);
+	System.out.println("HiScore" + hiscore);
+	System.out.println("Score" + score);
       	player.move();
 	keepPlayerInBounds();
 	for(int i = 0; i < hazards.size(); i ++){
@@ -95,9 +99,20 @@ public class FinalProject extends JPanel{
 	g.drawString("Score: " + getScore() + "   Lives: " + player.getLives() + "   Level: " + level, 10, 25);
     }
 
-    public void gameOver(int s, int h){
-	JOptionPane.showMessageDialog(this, "Game Over \nYour Score is: " + s + "\nThe Highest Score is: " + h, "Game Over", JOptionPane.YES_NO_OPTION);
-	System.exit(ABORT);
+    public boolean gameOver(int s, int h){
+	int option = JOptionPane.showConfirmDialog(null, "Game Over \nYour Score is: " + s + "\nThe Highest Score is: " + h + "\nRestart?", "Game Over", JOptionPane.YES_NO_OPTION);
+	return !(option == JOptionPane.YES_OPTION);
+    }
+
+    public void again(){
+	player.revive();
+	score -= Scored;
+	Scored = 0;
+	level = 1;
+	for (int i = 0; i < hazards.size(); i ++){
+	    hazards.remove(i);
+	}
+	System.out.println("again" + hiscore);
     }
 
     public void cleanUpHazards(){
@@ -145,6 +160,10 @@ public class FinalProject extends JPanel{
 	return level;
     }
 
+    public void togRun(){
+	running = !running;
+    }
+
     public static void main (String[]args)throws InterruptedException{
 	FinalProject game = new FinalProject();
 	game.initGame(game);
@@ -157,13 +176,22 @@ public class FinalProject extends JPanel{
 	    }
 	}
 
-	while (game.player.checkAlive()){
+	while (game.running){
 	    game.update();
 	    Thread.sleep(5);
-	    //System.out.println("Score: " + game.getScore() / 10);
 	    //System.out.println("Lives: " + game.player.getLives());
 	    // System.out.println("Level: " + game.getLevel());
+	    if (!game.player.checkAlive()){
+		System.out.println("" + game.getHiScore());
+		System.out.println("" + game.getScore());
+		game.updateHiScore();
+		System.out.println("" + game.getHiScore());
+		if (game.gameOver(game.getScore(), game.getHiScore())){
+		    game.togRun();
+		}
+		else game.again();
+	    }
 	}
-	game.gameOver(game.getScore(), game.getHiScore());
+	System.exit(ABORT);
     }
 }
