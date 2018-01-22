@@ -69,9 +69,6 @@ public class FinalProject extends JPanel{
 	if (getScore() > hiscore) hiscore = score/10;
     }
     private void update(){
-	System.out.println("Scored" + Scored);
-	System.out.println("HiScore" + hiscore);
-	System.out.println("Score" + score);
       	player.move();
 	keepPlayerInBounds();
 	for(int i = 0; i < hazards.size(); i ++){
@@ -112,7 +109,6 @@ public class FinalProject extends JPanel{
 	for (int i = 0; i < hazards.size(); i ++){
 	    hazards.remove(i);
 	}
-	System.out.println("again" + hiscore);
     }
 
     public void cleanUpHazards(){
@@ -182,10 +178,7 @@ public class FinalProject extends JPanel{
 	    //System.out.println("Lives: " + game.player.getLives());
 	    // System.out.println("Level: " + game.getLevel());
 	    if (!game.player.checkAlive()){
-		System.out.println("" + game.getHiScore());
-		System.out.println("" + game.getScore());
 		game.updateHiScore();
-		System.out.println("" + game.getHiScore());
 		if (game.gameOver(game.getScore(), game.getHiScore())){
 		    game.togRun();
 		}

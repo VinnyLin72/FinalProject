@@ -70,6 +70,8 @@ public class Player extends Rectangle implements KeyListener{
 
     public void revive(){
 	lives = origLives;
+	xa = 0;
+	ya = 0;
     }
     
     public boolean checkAlive(){
